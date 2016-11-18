@@ -40,7 +40,7 @@
   },
   "optionalDependencies": {
     "speaker": "colinbdclark/node-speaker#mpg123-lower-latency",
-    "midi": "0.9.5"
+    "midi": "simonbates/node-midi#f00909dc1ba82e33fd86d5e52ebd092cab866744"
   },
   "engines": {
     "node": ">=0.10.x"

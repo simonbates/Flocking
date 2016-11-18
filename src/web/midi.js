@@ -389,6 +389,17 @@ var fluid = fluid || require("infusion"),
     };
 
     flock.midi.system.refreshPorts = function (that, access, onPortsAvailable) {
+        // Delete existing RtMidiIn/RtMidiOut instances before refreshing
+        // to avoid running out of ALSA resources
+        // See https://github.com/justinlatimer/node-midi/issues/118
+        fluid.each(that.ports, function (portList) {
+            fluid.each(portList, function (port) {
+                if (port.midi && port.midi.release) {
+                    port.midi.release();
+                }
+            });
+        });
+
         that.ports = flock.midi.getPorts(access);
         onPortsAvailable(that.ports);
     };
